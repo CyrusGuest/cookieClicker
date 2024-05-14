@@ -123,6 +123,25 @@ const questions = [
     question: "Find the points of inflection for f(x) = x^4 - 4x^3 + 6x^2.",
     answer: "x = 1, x = 2",
   },
+  {
+    topic: "INTEGRALS",
+    subtopic: "Areas as Accumulation of Change",
+    question: "What is the definite integral of f(x) = 3 from x = 1 to x = 4?",
+    answer: "9",
+  },
+  {
+    topic: "INTEGRALS",
+    subtopic: "Areas as Accumulation of Change",
+    question: "What is the definite integral of f(x) = 2x from x = 0 to x = 3?",
+    answer: "9",
+  },
+  {
+    topic: "INTEGRALS",
+    subtopic: "Areas as Accumulation of Change",
+    question:
+      "What is the definite integral of f(x) = x^2 from x = 1 to x = 2?",
+    answer: "7/3",
+  },
 ];
 
 export default questions;

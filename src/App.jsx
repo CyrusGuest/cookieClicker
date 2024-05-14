@@ -123,32 +123,13 @@ function App() {
   const handlePurchase = (item) => {
     if (cookies >= item.cost) {
       setCurrentItem(item);
-      setCurrentQuestion(selectRandomQuestion(item));
+      setCurrentQuestion(selectRandomQuestion());
       setShowModal(true);
     }
   };
 
-  const selectRandomQuestion = (item) => {
-    const relevantQuestions = questions.filter((q) => {
-      if (
-        item.name === "Cursor" ||
-        item.name === "Factory" ||
-        item.name === "Bank"
-      ) {
-        return q.topic === "DERIVATIVES";
-      } else if (
-        item.name === "Grandma" ||
-        item.name === "Mine" ||
-        item.name === "Temple"
-      ) {
-        return q.topic === "LIMITS";
-      } else {
-        return false;
-      }
-    });
-    return relevantQuestions[
-      Math.floor(Math.random() * relevantQuestions.length)
-    ];
+  const selectRandomQuestion = () => {
+    return questions[Math.floor(Math.random() * questions.length)];
   };
 
   const handleModalSubmit = (answer) => {

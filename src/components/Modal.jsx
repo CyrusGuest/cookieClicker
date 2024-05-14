@@ -69,7 +69,7 @@ function Modal({ show, onClose, onSubmit, question }) {
             onClick={handleClose}
             className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
           >
-            {submitted && !correct ? "Close" : "Cancel"}
+            Close (Give Up)
           </button>
         </div>
       </div>
