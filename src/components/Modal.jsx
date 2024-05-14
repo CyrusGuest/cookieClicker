@@ -17,6 +17,9 @@ function Modal({ show, onClose, onSubmit, question }) {
 
     if (isCorrect) {
       onSubmit(answer, isCorrect);
+      setAnswer("");
+      setCorrect(false);
+      setSubmitted(false);
       onClose();
     }
 
@@ -27,11 +30,12 @@ function Modal({ show, onClose, onSubmit, question }) {
     if (!correct) {
       onSubmit(answer, correct);
     }
-    onClose();
 
     setAnswer("");
     setCorrect(false);
     setSubmitted(false);
+
+    onClose();
   };
 
   return (
