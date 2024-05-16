@@ -217,7 +217,8 @@ function App() {
             Show Leaderboard
           </button>
           <div className="mx-auto">
-            <UserID id={id} setId={setId} /> {/* Add UserID component here */}
+            <UserID id={id} setId={setId} cookies={cookies} />{" "}
+            {/* Add UserID component here */}
           </div>
           <h1 style={cookieTextStyle} className={cookieTextClasses}>
             {cookies} cookies

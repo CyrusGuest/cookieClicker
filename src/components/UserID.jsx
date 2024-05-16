@@ -1,7 +1,8 @@
 // src/components/UserID.js
 import React, { useState } from "react";
+import axios from "axios";
 
-const UserID = ({ id, setId }) => {
+const UserID = ({ id, setId, cookies }) => {
   const [newId, setNewId] = useState(id);
 
   const handleIdChange = (e) => {
@@ -10,6 +11,15 @@ const UserID = ({ id, setId }) => {
 
   const handleIdSubmit = () => {
     setId(newId);
+    try {
+      axios.post("https://cc.brandingandbeyond.org/update", {
+        id: newId,
+        cookies,
+        update: true,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
