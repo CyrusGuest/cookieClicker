@@ -28,19 +28,7 @@ function App() {
   const [currentItem, setCurrentItem] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [showLeaderboard, setShowLeaderboard] = useState(false); // Add state for leaderboard modal
-
-  const leaderboardData = [
-    { name: "Player1", cookies: 5000 },
-    { name: "Player2", cookies: 4500 },
-    { name: "Player3", cookies: 4000 },
-    { name: "Player4", cookies: 3500 },
-    { name: "Player5", cookies: 3000 },
-    { name: "Player6", cookies: 2500 },
-    { name: "Player7", cookies: 2000 },
-    { name: "Player8", cookies: 1500 },
-    { name: "Player9", cookies: 1000 },
-    { name: "Player10", cookies: 500 },
-  ];
+  const [leaderboardData, setLeaderboardData] = useState(false);
 
   const [items, setItems] = useState([
     {
@@ -85,10 +73,10 @@ function App() {
     const run = async () => {
       try {
         const result = await axios.get(
-          "http://cookieclicker-env.eba-ngym3wyi.us-east-1.elasticbeanstalk.com/leaderboard"
+          "https://cc.brandingandbeyond.org/leaderboard"
         );
 
-        console.log(result);
+        setLeaderboardData(result.data);
       } catch (error) {
         console.log(error);
       }

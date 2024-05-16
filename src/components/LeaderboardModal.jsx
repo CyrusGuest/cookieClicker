@@ -22,7 +22,7 @@ const LeaderboardModal = ({ show, onClose, leaderboardData }) => {
             {leaderboardData.map((player, index) => (
               <tr key={index}>
                 <td className="border px-4 py-2">{index + 1}</td>
-                <td className="border px-4 py-2">{player.name}</td>
+                <td className="border px-4 py-2">{player.id}</td>
                 <td className="border px-4 py-2">{player.cookies}</td>
               </tr>
             ))}
