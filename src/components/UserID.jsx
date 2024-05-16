@@ -13,7 +13,8 @@ const UserID = ({ id, setId, cookies }) => {
     setId(newId);
     try {
       axios.post("https://cc.brandingandbeyond.org/update", {
-        id: newId,
+        oldId: id,
+        newId,
         cookies,
         update: true,
       });
