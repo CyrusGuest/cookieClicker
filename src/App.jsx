@@ -80,7 +80,6 @@ function App() {
         axios.post("https://cc.brandingandbeyond.org/update", {
           id,
           cookies,
-          update: true,
         });
       } catch (error) {
         console.log(error);
