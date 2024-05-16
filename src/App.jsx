@@ -197,6 +197,14 @@ function App() {
     setCookies(cookies - currentItem.cost);
   };
 
+  window.addEventListener("beforeunload", function (event) {
+    try {
+      axios.delete(`https://cc.brandingandbeyond.org/delete/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
   return (
     <div className="App background-animate">
       <header className="text-5xl text-center marquee font-sans flex">
