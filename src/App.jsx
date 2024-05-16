@@ -198,7 +198,7 @@ function App() {
 
   window.addEventListener("beforeunload", function (event) {
     try {
-      axios.delete(`https://cc.brandingandbeyond.org/delete/${id}`);
+      axios.post(`https://cc.brandingandbeyond.org/delete`, { id });
     } catch (error) {
       console.log(error);
     }
