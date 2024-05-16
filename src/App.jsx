@@ -70,21 +70,27 @@ function App() {
   ]);
 
   useEffect(() => {
-    // Get the current time in milliseconds
-    const now = Date.now();
-    const date = new Date(now);
-    const seconds = date.getSeconds();
-
-    if (seconds % 15 === 0) {
+    // Function to send update to the server
+    const updateServer = async () => {
       try {
-        axios.post("https://cc.brandingandbeyond.org/update", {
+        await axios.post("https://cc.brandingandbeyond.org/update", {
           id,
           cookies,
         });
+        console.log("Updated server with current cookies:", cookies);
       } catch (error) {
-        console.log(error);
+        console.error("Error updating server:", error);
       }
-    }
+    };
+
+    // Send an update every minute
+    const intervalId = setInterval(updateServer, 60 * 1000);
+
+    // Send an initial update
+    updateServer();
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
   }, [id, cookies]);
 
   useEffect(() => {
@@ -195,19 +201,6 @@ function App() {
 
     setCookies(cookies - currentItem.cost);
   };
-
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      const payload = JSON.stringify({ id });
-      navigator.sendBeacon("https://cc.brandingandbeyond.org/delete", payload);
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [id]);
 
   return (
     <div className="App background-animate">
