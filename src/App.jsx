@@ -196,9 +196,9 @@ function App() {
     setCookies(cookies - currentItem.cost);
   };
 
-  window.addEventListener("beforeunload", function (event) {
+  window.addEventListener("beforeunload", async (event) => {
     try {
-      axios.post(`https://cc.brandingandbeyond.org/delete`, { id });
+      await axios.post(`https://cc.brandingandbeyond.org/delete`, { id });
     } catch (error) {
       console.log(error);
     }
