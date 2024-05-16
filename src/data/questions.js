@@ -15,19 +15,19 @@ const questions = [
     topic: "DERIVATIVES",
     subtopic: "Deriving Functions",
     question: "Find the derivative of f(x) = 3x^2 + 2x + 1.",
-    answer: "f'(x) = 6x + 2.",
+    answer: "f'(x) = 6x + 2",
   },
   {
     topic: "DERIVATIVES",
     subtopic: "Deriving Functions",
     question: "Find the derivative of f(x) = e^x.",
-    answer: "f'(x) = e^x.",
+    answer: "f'(x) = e^x",
   },
   {
     topic: "DERIVATIVES",
     subtopic: "Deriving Functions",
     question: "Find the derivative of f(x) = sin(x).",
-    answer: "f'(x) = cos(x).",
+    answer: "f'(x) = cos(x)",
   },
   {
     topic: "DERIVATIVES",

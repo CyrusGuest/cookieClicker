@@ -1,10 +1,14 @@
+// src/App.js
 import React, { useState, useEffect } from "react";
 import cookie from "./images/cookie.png";
 import brainrot from "./images/brainrot.png";
 import StoreItem from "./components/StoreItem";
 import InventoryItem from "./components/InventoryItem";
 import Modal from "./components/Modal";
-import questions from "./data/questions"; // Import the questions
+import UserID from "./components/UserID";
+import LeaderboardModal from "./components/LeaderboardModal"; // Import the LeaderboardModal component
+import questions from "./data/questions";
+import axios from "axios";
 
 function App() {
   const [cookies, setCookies] = useState(0);
@@ -19,6 +23,24 @@ function App() {
   const [cookieTextClasses, setCookieTextClasses] = useState(
     "mx-auto mt-6 text-3xl p-6"
   );
+  const [id, setId] = useState("" + Math.floor(Math.random() * 1000000000));
+  const [showModal, setShowModal] = useState(false);
+  const [currentItem, setCurrentItem] = useState(null);
+  const [currentQuestion, setCurrentQuestion] = useState(null);
+  const [showLeaderboard, setShowLeaderboard] = useState(false); // Add state for leaderboard modal
+
+  const leaderboardData = [
+    { name: "Player1", cookies: 5000 },
+    { name: "Player2", cookies: 4500 },
+    { name: "Player3", cookies: 4000 },
+    { name: "Player4", cookies: 3500 },
+    { name: "Player5", cookies: 3000 },
+    { name: "Player6", cookies: 2500 },
+    { name: "Player7", cookies: 2000 },
+    { name: "Player8", cookies: 1500 },
+    { name: "Player9", cookies: 1000 },
+    { name: "Player10", cookies: 500 },
+  ];
 
   const [items, setItems] = useState([
     {
@@ -59,9 +81,21 @@ function App() {
     },
   ]);
 
-  const [showModal, setShowModal] = useState(false);
-  const [currentItem, setCurrentItem] = useState(null);
-  const [currentQuestion, setCurrentQuestion] = useState(null);
+  useEffect(() => {
+    const run = async () => {
+      try {
+        const result = await axios.get(
+          "http://cookieclicker-env.eba-ngym3wyi.us-east-1.elasticbeanstalk.com/leaderboard"
+        );
+
+        console.log(result);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    run();
+  }, [showLeaderboard]);
 
   useEffect(() => {
     const intervalIds = items
@@ -142,7 +176,13 @@ function App() {
     if (isCorrect) {
       setItems(
         items.map((i) =>
-          i.name === currentItem.name ? { ...i, quantity: i.quantity + 1 } : i
+          i.name === currentItem.name
+            ? {
+                ...i,
+                quantity: i.quantity + 1,
+                cost: Math.round(i.cost + i.cost * 0.1),
+              }
+            : i
         )
       );
     }
@@ -163,6 +203,15 @@ function App() {
       </header>
       <div className="grid grid-cols-3">
         <div className="border-4 border-black flex flex-col">
+          <button
+            onClick={() => setShowLeaderboard(true)}
+            className=" p-2 bg-green-500 text-white"
+          >
+            Show Leaderboard
+          </button>
+          <div className="mx-auto">
+            <UserID id={id} setId={setId} /> {/* Add UserID component here */}
+          </div>
           <h1 style={cookieTextStyle} className={cookieTextClasses}>
             {cookies} cookies
           </h1>
@@ -196,6 +245,11 @@ function App() {
         onClose={() => setShowModal(false)}
         onSubmit={handleModalSubmit}
         question={currentQuestion}
+      />
+      <LeaderboardModal
+        show={showLeaderboard}
+        onClose={() => setShowLeaderboard(false)}
+        leaderboardData={leaderboardData}
       />
     </div>
   );
