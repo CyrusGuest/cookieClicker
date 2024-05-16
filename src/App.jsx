@@ -196,14 +196,18 @@ function App() {
     setCookies(cookies - currentItem.cost);
   };
 
-  window.addEventListener("beforeunload", (event) => {
-    try {
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
       const payload = JSON.stringify({ id });
       navigator.sendBeacon("https://cc.brandingandbeyond.org/delete", payload);
-    } catch (error) {
-      console.log(error);
-    }
-  });
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [id]);
 
   return (
     <div className="App background-animate">
