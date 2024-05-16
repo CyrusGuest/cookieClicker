@@ -75,7 +75,7 @@ function App() {
     const date = new Date(now);
     const seconds = date.getSeconds();
 
-    if (seconds === 30) {
+    if (seconds % 15 === 0) {
       try {
         axios.post("https://cc.brandingandbeyond.org/update", {
           id,
