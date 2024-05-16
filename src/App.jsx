@@ -196,9 +196,10 @@ function App() {
     setCookies(cookies - currentItem.cost);
   };
 
-  window.addEventListener("beforeunload", async (event) => {
+  window.addEventListener("beforeunload", (event) => {
     try {
-      await axios.post(`https://cc.brandingandbeyond.org/delete`, { id });
+      const payload = JSON.stringify({ id });
+      navigator.sendBeacon("https://cc.brandingandbeyond.org/delete", payload);
     } catch (error) {
       console.log(error);
     }
